@@ -70,7 +70,7 @@ import remixIcon from './icon--remix.svg';
 import dropdownCaret from './dropdown-caret.svg';
 import languageIcon from '../language-selector/language-icon.svg';
 
-import scratchLogo from './scratch-logo.svg';
+import scratchLogo from './u115.svg';
 
 import sharedMessages from '../../lib/shared-messages';
 
@@ -483,7 +483,7 @@ class MenuBar extends React.Component {
                         <FormattedMessage {...ariaMessages.tutorials} />
                     </div>
                     <Divider className={classNames(styles.divider)} />
-                    {this.props.canEditTitle ? (
+                    {/* {this.props.canEditTitle ? (
                         <div className={classNames(styles.menuBarItem, styles.growable)}>
                             <MenuBarItemTooltip
                                 enable
@@ -503,9 +503,10 @@ class MenuBar extends React.Component {
                             userId={this.props.authorId}
                             username={this.props.authorUsername}
                         />
-                    ) : null)}
+                    ) : null)} */}
                     <div className={classNames(styles.menuBarItem)}>
-                        {this.props.canShare ? (
+                        {
+                            this.props.canShare ? (
                             (this.props.isShowingProject || this.props.isUpdating) && (
                                 <ProjectWatcher onDoneUpdating={this.props.onSeeCommunity}>
                                     {
@@ -529,7 +530,8 @@ class MenuBar extends React.Component {
                                     <ShareButton className={styles.menuBarButton} />
                                 </MenuBarItemTooltip>
                             ) : []
-                        )}
+                        )
+                        }
                         {this.props.canRemix ? remixButton : []}
                     </div>
                     <div className={classNames(styles.menuBarItem, styles.communityButtonWrapper)}>
@@ -578,10 +580,18 @@ class MenuBar extends React.Component {
                                             styles.mystuffButton
                                         )}
                                     >
-                                        <img
+                                    <div onClick={this.handleOpenModal}>  
+                                    <FormattedMessage
+                                        defaultMessage="Save Now"
+                                        description="Title bar link for saving now"
+                                        id="gui.menuBar.saveNowLink"
+                                    />
+                                    </div>
+                                    
+                                        {/* <img
                                             className={styles.mystuffIcon}
                                             src={mystuffIcon}
-                                        />
+                                        /> */}
                                     </div>
                                 </a>
                                 <AccountNav
@@ -602,7 +612,7 @@ class MenuBar extends React.Component {
                             // ********* user not logged in, but a session exists
                             // ********* so they can choose to log in
                             <React.Fragment>
-                                <div
+                                {/* <div
                                     className={classNames(
                                         styles.menuBarItem,
                                         styles.hoverable
@@ -615,7 +625,7 @@ class MenuBar extends React.Component {
                                         description="Link for creating a Scratch account"
                                         id="gui.menuBar.joinScratch"
                                     />
-                                </div>
+                                </div> */}
                                 <div
                                     className={classNames(
                                         styles.menuBarItem,

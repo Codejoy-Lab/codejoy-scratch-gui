@@ -75,9 +75,9 @@
     "defaultMessage": "Turn on Turbo Mode"
   },
   {
-    "id": "gui.menuBar.joinScratch",
-    "description": "Link for creating a Scratch account",
-    "defaultMessage": "Join Scratch"
+    "id": "gui.menuBar.saveNowLink",
+    "description": "Title bar link for saving now",
+    "defaultMessage": "Save Now"
   },
   {
     "id": "gui.menuBar.signIn",
