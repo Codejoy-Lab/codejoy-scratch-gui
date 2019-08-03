@@ -34,7 +34,8 @@ export default function (projectId, vmState, params) {
     if (creatingProject) {
         Object.assign(opts, {
             method: 'post',
-            url: `${storage.projectHost}/${qs}`
+            // url: `${storage.projectHost}/${qs}`
+            url:`${storage.projectHost}/projects/create`
         });
     } else {
         Object.assign(opts, {
@@ -45,19 +46,22 @@ export default function (projectId, vmState, params) {
     return new Promise((resolve, reject) => {
         xhr(opts, (err, response) => {
             if (err) return reject(err);
-            if (response.statusCode !== 200) return reject(response.statusCode);
-            let body;
-            try {
-                // Since we didn't set json: true, we have to parse manually
-                body = JSON.parse(response.body);
-            } catch (e) {
-                return reject(e);
-            }
-            body.id = projectId;
-            if (creatingProject) {
-                body.id = body['content-name'];
-            }
+            if (response.statusCode === 200 || response.statusCode === 201){
+                let body;
+                try {
+                    // Since we didn't set json: true, we have to parse manually
+                    body = JSON.parse(response.body);
+                } catch (e) {
+                    return reject(e);
+                }
+                body.id = projectId;
+                if (creatingProject) {
+                    body.id = body['content-name'];
+                }
             resolve(body);
+            } else{
+                return reject(response.statusCode);
+            }
         });
     });
 }
