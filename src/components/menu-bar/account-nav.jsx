@@ -64,14 +64,14 @@ const AccountNavComponent = ({
             place={isRtl ? 'right' : 'left'}
             onRequestClose={onClose}
         >
-            <MenuItemContainer href={profileUrl}>
+            {/* <MenuItemContainer href={profileUrl}>
                 <FormattedMessage
                     defaultMessage="Profile"
                     description="Text to link to my user profile, in the account navigation menu"
                     id="gui.accountMenu.profile"
                 />
-            </MenuItemContainer>
-            <MenuItemContainer href="/mystuff/">
+            </MenuItemContainer> */}
+            <MenuItemContainer href="/dashboard/">
                 <FormattedMessage
                     defaultMessage="My Stuff"
                     description="Text to link to list of my projects, in the account navigation menu"
@@ -96,13 +96,13 @@ const AccountNavComponent = ({
                     />
                 </MenuItemContainer>
             ) : null}
-            <MenuItemContainer href="/accounts/settings/">
+            {/* <MenuItemContainer href="/accounts/settings/">
                 <FormattedMessage
                     defaultMessage="Account settings"
                     description="Text to link to my account settings, in the account navigation menu"
                     id="gui.accountMenu.accountSettings"
                 />
-            </MenuItemContainer>
+            </MenuItemContainer> */}
             <MenuSection>
                 <MenuItemContainer onClick={onLogOut}>
                     <FormattedMessage

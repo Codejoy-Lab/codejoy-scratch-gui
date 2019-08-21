@@ -69,7 +69,7 @@ export default appTarget => {
             <WrappedGui
                 isScratchDesktop
                 showTelemetryModal
-                canSave={false}
+                canSave={true}
                 showComingSoon={false}
                 onTelemetryModalCancel={handleTelemetryModalCancel}
                 onTelemetryModalOptIn={handleTelemetryModalOptIn}
@@ -79,7 +79,7 @@ export default appTarget => {
                 backpackVisible
                 showComingSoon={false}
                 backpackHost={backpackHost}
-                canSave={false}
+                canSave={true}
                 onClickLogo={onClickLogo}
             />,
         appTarget);

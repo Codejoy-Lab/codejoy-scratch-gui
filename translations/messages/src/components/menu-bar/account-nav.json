@@ -1,10 +1,5 @@
 [
   {
-    "id": "gui.accountMenu.profile",
-    "description": "Text to link to my user profile, in the account navigation menu",
-    "defaultMessage": "Profile"
-  },
-  {
     "id": "gui.accountMenu.myStuff",
     "description": "Text to link to list of my projects, in the account navigation menu",
     "defaultMessage": "My Stuff"
@@ -18,11 +13,6 @@
     "id": "gui.accountMenu.myClass",
     "description": "Text to link to my class (if I am a student), in the account navigation menu",
     "defaultMessage": "My Class"
-  },
-  {
-    "id": "gui.accountMenu.accountSettings",
-    "description": "Text to link to my account settings, in the account navigation menu",
-    "defaultMessage": "Account settings"
   },
   {
     "id": "gui.accountMenu.signOut",

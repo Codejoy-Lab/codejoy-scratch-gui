@@ -184,8 +184,9 @@ class MenuBar extends React.Component {
         this.props.onRequestCloseFile();
     }
     handleClickSave () {
+        console.log('handleClickSave')
         this.props.onClickSave();
-        this.props.onRequestCloseFile();
+        // this.props.onRequestCloseFile();
     }
     handleClickSaveAsCopy () {
         this.props.onClickSaveAsCopy();
@@ -483,7 +484,7 @@ class MenuBar extends React.Component {
                         <FormattedMessage {...ariaMessages.tutorials} />
                     </div>
                     <Divider className={classNames(styles.divider)} />
-                    {/* {this.props.canEditTitle ? (
+                    {this.props.canEditTitle ? (
                         <div className={classNames(styles.menuBarItem, styles.growable)}>
                             <MenuBarItemTooltip
                                 enable
@@ -503,7 +504,7 @@ class MenuBar extends React.Component {
                             userId={this.props.authorId}
                             username={this.props.authorUsername}
                         />
-                    ) : null)} */}
+                    ) : null)}
                     <div className={classNames(styles.menuBarItem)}>
                         {
                             this.props.canShare ? (
@@ -565,35 +566,31 @@ class MenuBar extends React.Component {
                 <div className={styles.accountInfoGroup}>
                     <div className={styles.menuBarItem}>
                         {this.props.canSave && (
-                            <SaveStatus />
+                            <div onClick={this.handleClickSave}>  
+                                <SaveStatus />
+                            </div>
                         )}
                     </div>
-                    {this.props.sessionExists ? (
+                    {
+                        this.props.sessionExists ? (
                         this.props.username ? (
                             // ************ user is logged in ************
                             <React.Fragment>
-                                <a href="/mystuff/">
-                                    <div
+                                    {/* <div
                                         className={classNames(
                                             styles.menuBarItem,
                                             styles.hoverable,
                                             styles.mystuffButton
                                         )}
                                     >
-                                    <div onClick={this.handleOpenModal}>  
-                                    <FormattedMessage
-                                        defaultMessage="Save Now"
-                                        description="Title bar link for saving now"
-                                        id="gui.menuBar.saveNowLink"
-                                    />
-                                    </div>
-                                    
-                                        {/* <img
-                                            className={styles.mystuffIcon}
-                                            src={mystuffIcon}
-                                        /> */}
-                                    </div>
-                                </a>
+                                        <div onClick={this.handleClickSave}>  
+                                            <FormattedMessage
+                                                defaultMessage="Save Now"
+                                                description="Title bar link for saving now"
+                                                id="gui.menuBar.saveNowLink"
+                                            />
+                                        </div>
+                                    </div> */}
                                 <AccountNav
                                     className={classNames(
                                         styles.menuBarItem,

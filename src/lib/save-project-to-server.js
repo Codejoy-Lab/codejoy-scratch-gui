@@ -1,7 +1,7 @@
 import queryString from 'query-string';
 import xhr from 'xhr';
 import storage from '../lib/storage';
-
+import dataParse from './dataParse';
 /**
  * Save a project JSON to the project server.
  * This should eventually live in scratch-www.
@@ -15,6 +15,9 @@ import storage from '../lib/storage';
  * @return {Promise} A promise that resolves when the network request resolves.
  */
 export default function (projectId, vmState, params) {
+
+    // const data = dataParse(vmState)
+    // console.log('data',data)
     const opts = {
         body: vmState,
         // If we set json:true then the body is double-stringified, so don't
@@ -23,6 +26,7 @@ export default function (projectId, vmState, params) {
         },
         withCredentials: true
     };
+    
     const creatingProject = projectId === null || typeof projectId === 'undefined';
     const queryParams = {};
     if (params.hasOwnProperty('originalId')) queryParams.original_id = params.originalId;
@@ -37,15 +41,18 @@ export default function (projectId, vmState, params) {
             // url: `${storage.projectHost}/${qs}`
             url:`${storage.projectHost}/projects/create`
         });
+        // console.log('Object',Object)
     } else {
         Object.assign(opts, {
             method: 'put',
-            url: `${storage.projectHost}/${projectId}${qs}`
+            url: `${storage.projectHost}/projects/${projectId}${qs}`
         });
+        // console.log('Object',Object)
     }
     return new Promise((resolve, reject) => {
         xhr(opts, (err, response) => {
             if (err) return reject(err);
+            console.log('response',response)
             if (response.statusCode === 200 || response.statusCode === 201){
                 let body;
                 try {

@@ -199,7 +199,7 @@ var handleTelemetryModalOptOut = function handleTelemetryModalOptOut() {
   simulateScratchDesktop ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(WrappedGui, {
     isScratchDesktop: true,
     showTelemetryModal: true,
-    canSave: false,
+    canSave: true,
     showComingSoon: false,
     onTelemetryModalCancel: handleTelemetryModalCancel,
     onTelemetryModalOptIn: handleTelemetryModalOptIn,
@@ -208,7 +208,7 @@ var handleTelemetryModalOptOut = function handleTelemetryModalOptOut() {
     backpackVisible: true,
     showComingSoon: false,
     backpackHost: backpackHost,
-    canSave: false,
+    canSave: true,
     onClickLogo: onClickLogo
   }), appTarget);
 });

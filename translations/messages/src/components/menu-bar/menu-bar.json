@@ -75,11 +75,6 @@
     "defaultMessage": "Turn on Turbo Mode"
   },
   {
-    "id": "gui.menuBar.saveNowLink",
-    "description": "Title bar link for saving now",
-    "defaultMessage": "Save Now"
-  },
-  {
     "id": "gui.menuBar.signIn",
     "description": "Link for signing in to your Scratch account",
     "defaultMessage": "Sign in"

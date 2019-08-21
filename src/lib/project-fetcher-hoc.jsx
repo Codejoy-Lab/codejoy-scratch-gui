@@ -72,6 +72,7 @@ const ProjectFetcherHOC = function (WrappedComponent) {
                 .load(storage.AssetType.Project, projectId, storage.DataFormat.JSON)
                 .then(projectAsset => {
                     if (projectAsset) {
+                        console.log('projectAsset',projectAsset)
                         this.props.onFetchedProjectData(projectAsset.data, loadingState);
                     } else {
                         // Treat failure to load as an error
@@ -130,8 +131,8 @@ const ProjectFetcherHOC = function (WrappedComponent) {
         setProjectId: PropTypes.func
     };
     ProjectFetcherComponent.defaultProps = {
-        assetHost: 'http://192.168.1.112:7001',//'https://assets.scratch.mit.edu',
-        projectHost: 'http://192.168.1.112:7001'//'https://projects.scratch.mit.edu'
+        assetHost: 'http://192.168.1.110:7001',//'https://assets.scratch.mit.edu',
+        projectHost: 'http://192.168.1.110:7001'//'https://projects.scratch.mit.edu'
     };
 
     const mapStateToProps = state => ({

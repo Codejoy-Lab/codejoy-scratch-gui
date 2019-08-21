@@ -226,6 +226,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
             // serialized project refers to a newer asset than what
             // we just finished saving).
             const savedVMState = this.props.vm.toJSON();
+            console.log('savedVMState',savedVMState)
             return Promise.all(this.props.vm.assets
                 .filter(asset => !asset.clean)
                 .map(
