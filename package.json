@@ -172,5 +172,8 @@
     "test:unit": "jest test[\\\\/]unit",
     "watch": "webpack --progress --colors --watch"
   },
-  "version": "0.1.0-prerelease.20190718181300"
+  "version": "0.1.0-prerelease.20190718181300",
+  "dependencies": {
+    "axios": "^0.19.2"
+  }
 }

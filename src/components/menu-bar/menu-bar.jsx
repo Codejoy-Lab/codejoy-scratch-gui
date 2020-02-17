@@ -232,6 +232,7 @@ class MenuBar extends React.Component {
             downloadProjectCallback();
             if (this.props.onProjectTelemetryEvent) {
                 const metadata = collectMetadata(this.props.vm, this.props.projectTitle, this.props.locale);
+                console.log("metadata",metadata)
                 this.props.onProjectTelemetryEvent('projectDidSave', metadata);
             }
         };

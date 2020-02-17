@@ -4,6 +4,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {projectTitleInitialState} from '../reducers/project-title';
 import downloadBlob from '../lib/download-blob';
+import uploadProject from '../lib/save-project-to-file-server';
 /**
  * Project saver component passes a downloadProject function to its child.
  * It expects this child to be a function with the signature
@@ -27,10 +28,13 @@ class SB3Downloader extends React.Component {
     }
     downloadProject () {
         this.props.saveProjectSb3().then(content => {
+            // console.log("content",content)
             if (this.props.onSaveFinished) {
                 this.props.onSaveFinished();
             }
-            downloadBlob(this.props.projectFilename, content);
+            //TODO save now do not call downloadBlob, if download to computer then call it
+            uploadProject(this.props.projectFilename, content)
+            // downloadBlob(this.props.projectFilename, content);
         });
     }
     render () {
