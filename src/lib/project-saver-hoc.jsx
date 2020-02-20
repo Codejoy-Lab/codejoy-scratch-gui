@@ -67,6 +67,8 @@ const ProjectSaverHOC = function (WrappedComponent) {
             this.props.onSetProjectSaver(this.tryToAutoSave);
         }
         componentDidUpdate (prevProps) {
+            console.log("project saver hoc props",this.props)
+            console.log("project saver hoc prevProps",prevProps)
             if (!this.props.isAnyCreatingNewState && prevProps.isAnyCreatingNewState) {
                 this.reportTelemetryEvent('projectWasCreated');
             }
@@ -78,7 +80,8 @@ const ProjectSaverHOC = function (WrappedComponent) {
                 this.scheduleAutoSave();
             }
             if (this.props.isUpdating && !prevProps.isUpdating) {
-                this.updateProjectToStorage();
+                // if we change back to post json, we should remove "//" of following
+                // this.updateProjectToStorage();
             }
             if (this.props.isCreatingNew && !prevProps.isCreatingNew) {
                 this.createNewProjectToStorage();
@@ -145,6 +148,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
             }
         }
         tryToAutoSave () {
+            console.log("create now")
             if (this.props.projectChanged && this.props.isShowingSaveable) {
                 this.props.onAutoUpdateProject();
             }
@@ -153,6 +157,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
             return props.canCreateNew && props.isShowingWithoutId;
         }
         updateProjectToStorage () {
+            console.log("updateProjectToStorage")
             this.props.onShowSavingAlert();
             return this.storeProject(this.props.reduxProjectId)
                 .then(() => {
@@ -169,6 +174,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
                 });
         }
         createNewProjectToStorage () {
+            console.log("createNewProjectToStorage")
             return this.storeProject(null)
                 .then(response => {
                     this.props.onCreatedProject(response.id.toString(), this.props.loadingState);
@@ -179,6 +185,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
                 });
         }
         createCopyToStorage () {
+            console.log("createCopyToStorage")
             this.props.onShowCreatingCopyAlert();
             return this.storeProject(null, {
                 originalId: this.props.reduxProjectId,
@@ -195,6 +202,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
                 });
         }
         createRemixToStorage () {
+            console.log("createRemixToStorage")
             this.props.onShowCreatingRemixAlert();
             return this.storeProject(null, {
                 originalId: this.props.reduxProjectId,
@@ -216,6 +224,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
          * @return {Promise} - resolves with json object containing project's existing or new id
          * @param {?object} requestParams - object of params to add to request body
          */
+        // TODO
         storeProject (projectId, requestParams) {
             requestParams = requestParams || {};
             this.clearAutoSaveTimeout();

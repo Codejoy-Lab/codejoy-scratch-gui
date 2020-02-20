@@ -97,7 +97,7 @@ class SBFileUploader extends React.Component {
             projectChanged,
             userOwnsProject
         } = this.props;
-
+        // console.log("e.target.files",e.target.files[0])
         const thisFileInput = e.target;
         if (thisFileInput.files) { // Don't attempt to load if no file was selected
             this.fileToUpload = thisFileInput.files[0];

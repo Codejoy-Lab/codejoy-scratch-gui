@@ -232,7 +232,7 @@ class MenuBar extends React.Component {
             downloadProjectCallback();
             if (this.props.onProjectTelemetryEvent) {
                 const metadata = collectMetadata(this.props.vm, this.props.projectTitle, this.props.locale);
-                console.log("metadata",metadata)
+                // console.log("metadata",metadata)
                 this.props.onProjectTelemetryEvent('projectDidSave', metadata);
             }
         };
@@ -376,9 +376,23 @@ class MenuBar extends React.Component {
                                 {(this.props.canSave || this.props.canCreateCopy || this.props.canRemix) && (
                                     <MenuSection>
                                         {this.props.canSave ? (
-                                            <MenuItem onClick={this.handleClickSave}>
-                                                {saveNowMessage}
-                                            </MenuItem>
+                                            <div> 
+                                            {/*  onClick={this.handleClickSave} */}
+                                                {/* {saveNowMessage} */}
+                                                <SB3Downloader
+                                                    toServer={true}
+                                                >
+                                                    {(className, downloadProjectCallback) => (
+                                                        <MenuItem
+                                                            className={className}
+                                                            onClick={this.handleSaveToComputer(downloadProjectCallback)}
+                                                        >
+                                                        {/* Save the project sb3 file to server */}
+                                                            {saveNowMessage}
+                                                            
+                                                        </MenuItem>
+                                            )}</SB3Downloader>
+                                            </div>
                                         ) : []}
                                         {this.props.canCreateCopy ? (
                                             <MenuItem onClick={this.handleClickSaveAsCopy}>
@@ -567,8 +581,20 @@ class MenuBar extends React.Component {
                 <div className={styles.accountInfoGroup}>
                     <div className={styles.menuBarItem}>
                         {this.props.canSave && (
-                            <div onClick={this.handleClickSave}>  
-                                <SaveStatus />
+                            <div>
+                            {/* onClick={this.handleClickSave} */}
+                            <SB3Downloader
+                                    toServer={true}
+                                >
+                                    {(className, downloadProjectCallback) => (
+                                        <MenuItem
+                                            className={className}
+                                            onClick={this.handleSaveToComputer(downloadProjectCallback)}
+                                        >
+                                            <SaveStatus />
+                                        </MenuItem>
+                            )}</SB3Downloader>  
+                                
                             </div>
                         )}
                     </div>

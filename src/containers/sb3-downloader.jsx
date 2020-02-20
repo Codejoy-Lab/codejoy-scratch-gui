@@ -33,8 +33,12 @@ class SB3Downloader extends React.Component {
                 this.props.onSaveFinished();
             }
             //TODO save now do not call downloadBlob, if download to computer then call it
-            uploadProject(this.props.projectFilename, content)
-            // downloadBlob(this.props.projectFilename, content);
+            if(this.props.toServer){
+                uploadProject(this.props.projectFilename, content);
+            }else{
+                downloadBlob(this.props.projectFilename, content);
+            }
+            
         });
     }
     render () {

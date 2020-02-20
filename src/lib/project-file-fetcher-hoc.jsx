@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {intlShape, injectIntl} from 'react-intl';
 import bindAll from 'lodash.bindall';
 import {connect} from 'react-redux';
+import axios from 'axios';
 
 import {setProjectUnchanged} from '../reducers/project-changed';
 import {
@@ -28,8 +29,8 @@ import storage from './storage';
  * @param {React.Component} WrappedComponent component to receive projectData prop
  * @returns {React.Component} component with project loading behavior
  */
-const ProjectFetcherHOC = function (WrappedComponent) {
-    class ProjectFetcherComponent extends React.Component {
+const ProjectFileFetcherHOC = function (WrappedComponent) {
+    class ProjectFileFetcherComponent extends React.Component {
         constructor (props) {
             super(props);
             bindAll(this, [
@@ -51,8 +52,7 @@ const ProjectFetcherHOC = function (WrappedComponent) {
             }
         }
         componentDidUpdate (prevProps) {
-            // console.log("this.props",this.props)
-            // console.log("prevProps",prevProps)
+            
             if (prevProps.projectHost !== this.props.projectHost) {
                 storage.setProjectHost(this.props.projectHost);
             }
@@ -70,26 +70,37 @@ const ProjectFetcherHOC = function (WrappedComponent) {
                 this.props.onActivateTab(BLOCKS_TAB_INDEX);
             }
         }
-        // if it is a new project the projectId will be 0
         fetchProject (projectId, loadingState) {
-            console.log("this.props.reduxProjectId",storage)
-
-            return storage
-                .load(storage.AssetType.Project, projectId, storage.DataFormat.JSON)
-                .then(projectAsset => {
-                    if (projectAsset) {
-                        // console.log('Fetch',projectAsset)
-                        this.props.onFetchedProjectData(projectAsset.data, loadingState);
-                    } else {
-                        // Treat failure to load as an error
-                        // Throw to be caught by catch later on
-                        throw new Error('Could not find project');
-                    }
-                })
-                .catch(err => {
-                    this.props.onError(err);
-                    log.error(err);
-                });
+            return axios.get("http://0.0.0.0:3000/download", {
+                headers: {
+                  "Content-Type": "multipart/form-data",
+                  "withCredentials": true
+                }
+              })
+              .then((res) => {
+                console.log("succeed",res);
+                if(res.status===200){
+                    this.props.onFetchedProjectData(res.data, loadingState);
+                }
+              });
+            // console.log("this.props.reduxProjectId",storage)
+            // TODO
+            // return storage
+            //     .load(storage.AssetType.Project, projectId, storage.DataFormat.JSON)
+            //     .then(projectAsset => {
+            //         if (projectAsset) {
+            //             // console.log('Fetch',projectAsset)
+            //             this.props.onFetchedProjectData(projectAsset.data, loadingState);
+            //         } else {
+            //             // Treat failure to load as an error
+            //             // Throw to be caught by catch later on
+            //             throw new Error('Could not find project');
+            //         }
+            //     })
+            //     .catch(err => {
+            //         this.props.onError(err);
+            //         log.error(err);
+            //     });
         }
         render () {
             const {
@@ -118,7 +129,7 @@ const ProjectFetcherHOC = function (WrappedComponent) {
             );
         }
     }
-    ProjectFetcherComponent.propTypes = {
+    ProjectFileFetcherComponent.propTypes = {
         assetHost: PropTypes.string,
         canSave: PropTypes.bool,
         intl: intlShape.isRequired,
@@ -136,7 +147,7 @@ const ProjectFetcherHOC = function (WrappedComponent) {
         reduxProjectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         setProjectId: PropTypes.func
     };
-    ProjectFetcherComponent.defaultProps = {
+    ProjectFileFetcherComponent.defaultProps = {
         assetHost: 'https://assets.scratch.mit.edu',//'http://localhost:3000',//
         projectHost: 'https://projects.scratch.mit.edu'//'http://localhost:3000'//
     };
@@ -165,9 +176,9 @@ const ProjectFetcherHOC = function (WrappedComponent) {
         mapStateToProps,
         mapDispatchToProps,
         mergeProps
-    )(ProjectFetcherComponent));
+    )(ProjectFileFetcherComponent));
 };
 
 export {
-    ProjectFetcherHOC as default
+    ProjectFileFetcherHOC as default
 };
